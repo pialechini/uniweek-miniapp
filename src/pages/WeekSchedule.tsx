@@ -11,7 +11,7 @@ import { useEffect, useMemo, useState } from "react";
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   padding: 32px 20px;
   background-color: ${themeColor("pageBackground")};
   display: flex;
