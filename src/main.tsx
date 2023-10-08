@@ -1,14 +1,15 @@
-import App from './App.tsx';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import WeekSchedule from '@/pages/WeekSchedule.tsx';
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import App from "./App";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import WeekSchedule from "@/pages/WeekSchedule";
+import { createHashRouter, RouterProvider } from "react-router-dom";
+import "./fonts.css";
 
 const router = createHashRouter([
   {
     path: "/",
     element: <App />,
-    children: [{ path: "weekSchedule", element: <WeekSchedule /> }],
+    children: [{ path: "week-schedule", element: <WeekSchedule /> }],
   },
 ]);
 

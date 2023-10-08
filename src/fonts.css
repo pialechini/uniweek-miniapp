@@ -1,0 +1,18 @@
+@font-face {
+  font-family: Vazir;
+  font-weight: 300;
+  src: url(./assets/fonts/Vazir-Light.ttf);
+}
+
+@font-face {
+  font-family: Vazir;
+  font-weight: 500;
+  src: url(./assets/fonts/Vazir-Medium.ttf);
+}
+
+@font-face {
+  font-family: Vazir;
+  font-weight: 700;
+  src: url(./assets/fonts/Vazir-Bold.ttf);
+  color: #fff;
+}
