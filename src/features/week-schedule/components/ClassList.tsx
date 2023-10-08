@@ -1,6 +1,6 @@
-import * as types from '@/types/types';
-import Class from '@/features/week-schedule/components/Class';
-import styled from 'styled-components';
+import * as types from "@/types/types";
+import Class from "@/features/week-schedule/components/Class";
+import styled from "styled-components";
 
 const StyledClassList = styled.div`
   min-height: 228px;

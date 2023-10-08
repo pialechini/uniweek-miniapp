@@ -1,8 +1,8 @@
-import * as types from '@/types/types';
-import { defaultTheme } from '@/theme/defaultTheme.ts';
-import { ExecutionContext } from 'styled-components';
-import { PropsWithChildren } from 'react';
-import { ThemeProvider } from 'styled-components';
+import * as types from "@/types/types";
+import { defaultTheme } from "@/theme/defaultTheme.ts";
+import { ExecutionContext } from "styled-components";
+import { PropsWithChildren } from "react";
+import { ThemeProvider } from "styled-components";
 
 export const themeColor =
   (color: types.ThemeColor) => (props: ExecutionContext) =>

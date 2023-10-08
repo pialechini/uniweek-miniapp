@@ -1,5 +1,5 @@
-import { defaultTheme } from '@/theme/defaultTheme.ts';
-import 'styled-components';
+import { defaultTheme } from "@/theme/defaultTheme.ts";
+import "styled-components";
 
 type Theme = typeof defaultTheme;
 

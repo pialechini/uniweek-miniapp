@@ -1,6 +1,6 @@
-import GlobalStyles from '@/theme/GlobalStyles.tsx';
-import Theme from '@/theme/Theme.tsx';
-import { Outlet } from 'react-router-dom';
+import GlobalStyles from "@/theme/GlobalStyles.tsx";
+import Theme from "@/theme/Theme.tsx";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (

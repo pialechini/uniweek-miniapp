@@ -1,5 +1,5 @@
-import * as types from '@/types/types';
-import sampleCourseSchedule from '@/sample-course-schedule';
+import * as types from "@/types/types";
+import sampleCourseSchedule from "@/sample-course-schedule";
 
 function initializeEmptyWeekSchedule(): types.WeekSchedule {
   return Array.from({ length: 5 }, () =>

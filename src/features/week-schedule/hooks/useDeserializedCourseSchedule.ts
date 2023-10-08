@@ -1,6 +1,6 @@
-import * as types from '@/types/types';
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import * as types from "@/types/types";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 function decodeObject<T>(encoded: string): T {
   const binary = atob(encoded);

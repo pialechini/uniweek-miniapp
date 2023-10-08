@@ -1,6 +1,6 @@
-import * as types from '@/types/types';
-import styled from 'styled-components';
-import { themeColor } from '@/theme/Theme';
+import * as types from "@/types/types";
+import styled from "styled-components";
+import { themeColor } from "@/theme/Theme";
 
 const StyledClass = styled.div`
   display: flex;
