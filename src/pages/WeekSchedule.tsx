@@ -1,30 +1,22 @@
-import * as types from '@/types/types';
-import DaySchedule from '@/features/week-schedule/components/DaySchedule';
-import Pagination from '@/features/week-schedule/components/Pagination';
-import sampleCourseSchedule from '@/sample-course-schedule';
-import styled from 'styled-components';
-import { constructWeekSchedule } from '@/lib/golestan';
-import { getCurrentDay, getWeekdayName } from '@/lib/persian-date';
-import { themeColor } from '@/theme/Theme';
-import { useEffect, useState } from 'react';
+import * as types from "@/types/types";
+import DaySchedule from "@/features/week-schedule/components/DaySchedule";
+import DaySwitcher from "@/features/week-schedule/components/DaySwitcher";
+import sampleCourseSchedule from "@/sample-course-schedule";
+import styled from "styled-components";
+import { constructWeekSchedule } from "@/lib/golestan";
+import { getCurrentDay, getWeekdayName } from "@/lib/persian-date";
+import { themeColor } from "@/theme/Theme";
+import { useEffect, useMemo, useState } from "react";
 // import useDeserializedCourseSchedule from '@/features/week-schedule/hooks/useDeserializedCourseSchedule';
 
-const Background = styled.div`
+const Container = styled.div`
   width: 100vw;
   height: 100vh;
   padding: 32px 20px;
   background-color: ${themeColor("pageBackground")};
-`;
-
-const TodayButton = styled.button`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  font-weight: 700;
-  height: 52px;
-  background-color: ${themeColor("primary")};
-  color: ${themeColor("pageBackground")};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 function WeekSchedule() {
@@ -33,36 +25,32 @@ function WeekSchedule() {
   // const schedule = useDeserializedCourseSchedule();
   const [dayIndex, setDayIndex] = useState<number>(getCurrentDay());
   const [weekSchedule, setWeekSchedule] = useState<types.WeekSchedule>();
+  const today = useMemo(getCurrentDay, []);
 
   useEffect(() => {
     setWeekSchedule(constructWeekSchedule("even", sampleCourseSchedule));
   }, []);
 
   return (
-    <Background>
+    <Container>
       {weekSchedule && (
         <>
           <DaySchedule
             dayIndex={dayIndex as types.DayIndex}
             classes={weekSchedule.at(dayIndex)!}
           />
-          <div style={{ marginTop: "56px" }}>
-            <Pagination
-              previous={
-                dayIndex - 1 < 0 ? undefined : getWeekdayName(dayIndex - 1)
-              }
-              next={dayIndex + 1 > 4 ? undefined : getWeekdayName(dayIndex + 1)}
-              onPreviousButtonClick={() => setDayIndex((i) => i - 1)}
-              onNextButtonClick={() => setDayIndex((i) => i + 1)}
-            />
-          </div>
         </>
       )}
 
-      <TodayButton onClick={() => setDayIndex(getCurrentDay())}>
-        امروز
-      </TodayButton>
-    </Background>
+      <DaySwitcher
+        previous={dayIndex - 1 < 0 ? undefined : getWeekdayName(dayIndex - 1)}
+        next={dayIndex + 1 > 4 ? undefined : getWeekdayName(dayIndex + 1)}
+        showGoTodayButton={dayIndex !== today}
+        onPreviousButtonClick={() => setDayIndex((i) => i - 1)}
+        onNextButtonClick={() => setDayIndex((i) => i + 1)}
+        onGoTodayClick={() => setDayIndex(today)}
+      />
+    </Container>
   );
 }
 
