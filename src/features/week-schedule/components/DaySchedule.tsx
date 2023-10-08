@@ -1,13 +1,14 @@
-import * as types from '@/types/types';
-import ClassList from '@/features/week-schedule/components/ClassList';
-import styled from 'styled-components';
-import { getCurrentDay, getWeekdayName } from '@/lib/persian-date';
-import { themeColor } from '@/theme/Theme';
+import * as types from "@/types/types";
+import ClassList from "@/features/week-schedule/components/ClassList";
+import styled from "styled-components";
+import { getCurrentDay, getWeekdayName } from "@/lib/persian-date";
+import { themeColor } from "@/theme/Theme";
+import { useMemo } from "react";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 32px;
   align-items: start;
   margin-right: 8px;
 `;
@@ -18,6 +19,7 @@ const Weekday = styled.div<{ $active?: boolean }>`
   text-align: center;
   position: relative;
   font-weight: 500;
+  transition: all 0.2s ease;
   ${(props) =>
     props.$active
       ? {
@@ -89,7 +91,7 @@ function calculatePassedClasses(today: number, dayIndex: number) {
 }
 
 function DaySchedule({ classes, dayIndex }: DayScheduleProps) {
-  const today = getCurrentDay();
+  const today = useMemo(getCurrentDay, []);
   const passedClasses = calculatePassedClasses(today, dayIndex);
 
   return (
