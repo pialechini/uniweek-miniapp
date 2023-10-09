@@ -1,13 +1,11 @@
 import * as types from "@/types/types";
 import DaySchedule from "@/features/week-schedule/components/DaySchedule";
 import DaySwitcher from "@/features/week-schedule/components/DaySwitcher";
-import sampleCourseSchedule from "@/sample-course-schedule";
 import styled from "styled-components";
-import { constructWeekSchedule } from "@/lib/golestan";
+import useWeekSchedule from "@/features/week-schedule/hooks/useWeekSchedule";
 import { getCurrentDay, getWeekdayName } from "@/lib/persian-date";
 import { themeColor } from "@/theme/Theme";
-import { useEffect, useMemo, useState } from "react";
-// import useDeserializedCourseSchedule from '@/features/week-schedule/hooks/useDeserializedCourseSchedule';
+import { useMemo, useState } from "react";
 
 const Container = styled.div`
   width: 100vw;
@@ -20,16 +18,9 @@ const Container = styled.div`
 `;
 
 function WeekSchedule() {
-  //TODO replace with the correct one
-  // const schedule = sampleCourseSchedule;
-  // const schedule = useDeserializedCourseSchedule();
   const [dayIndex, setDayIndex] = useState<number>(getCurrentDay());
-  const [weekSchedule, setWeekSchedule] = useState<types.WeekSchedule>();
+  const weekSchedule = useWeekSchedule();
   const today = useMemo(getCurrentDay, []);
-
-  useEffect(() => {
-    setWeekSchedule(constructWeekSchedule("even", sampleCourseSchedule));
-  }, []);
 
   return (
     <Container>
