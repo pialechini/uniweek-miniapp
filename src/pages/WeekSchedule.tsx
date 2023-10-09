@@ -17,6 +17,11 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
+const Error = styled.div`
+  line-height: 42px;
+  color: ${themeColor("accent")};
+`;
+
 function WeekSchedule() {
   const [dayIndex, setDayIndex] = useState<number>(getCurrentDay());
   const weekSchedule = useWeekSchedule();
@@ -24,13 +29,19 @@ function WeekSchedule() {
 
   return (
     <Container>
-      {weekSchedule && (
+      {weekSchedule ? (
         <>
           <DaySchedule
             dayIndex={dayIndex as types.DayIndex}
             classes={weekSchedule.at(dayIndex)!}
           />
         </>
+      ) : (
+        <Error>
+          امممم. برنامه تون موجود نیست ... 😅
+          <br />
+          لطفا راهنمای ربات رو مطالعه کنین.
+        </Error>
       )}
 
       <DaySwitcher
