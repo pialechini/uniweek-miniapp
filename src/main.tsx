@@ -1,7 +1,7 @@
 import App from "./App";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import WeekSchedule from "@/pages/WeekSchedule";
+import WeekSchedule from "@/pages/WeekSchedulePage";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import "./fonts.css";
 

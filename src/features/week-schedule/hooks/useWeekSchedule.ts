@@ -35,6 +35,7 @@ function isEvenWeekOrOdd(): "even" | "odd" {
 }
 
 function useWeekSchedule() {
+  const [loading, setLoading] = useState(true);
   const [searchParams] = useSearchParams();
   const [weekSchedule, setWeekSchedule] = useState<types.WeekSchedule | null>(
     null
@@ -44,18 +45,22 @@ function useWeekSchedule() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await supabase
-        .from("week_schedule")
-        .select("even_week_schedule,odd_week_schedule")
-        .single();
+      try {
+        const { data } = await supabase
+          .from("week_schedule")
+          .select("even_week_schedule,odd_week_schedule")
+          .single();
 
-      isEvenWeekOrOdd() === "even"
-        ? setWeekSchedule(JSON.parse(data?.even_week_schedule))
-        : setWeekSchedule(JSON.parse(data?.odd_week_schedule));
+        isEvenWeekOrOdd() === "even"
+          ? setWeekSchedule(JSON.parse(data?.even_week_schedule))
+          : setWeekSchedule(JSON.parse(data?.odd_week_schedule));
+      } finally {
+        setLoading(false);
+      }
     })();
   }, [loggedIn]);
 
-  return weekSchedule;
+  return { weekSchedule, loading };
 }
 
 export default useWeekSchedule;
