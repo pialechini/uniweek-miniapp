@@ -41,14 +41,19 @@ function useWeekSchedule() {
     null
   );
 
-  const loggedIn = useAuth(searchParams.get("credentials"));
+  const user = useAuth(searchParams.get("credentials"));
 
   useEffect(() => {
     (async () => {
+      if (!user) {
+        return;
+      }
+
       try {
         const { data } = await supabase
           .from("week_schedule")
           .select("even_week_schedule,odd_week_schedule")
+          .eq("user_id", user?.id)
           .single();
 
         isEvenWeekOrOdd() === "even"
@@ -58,7 +63,7 @@ function useWeekSchedule() {
         setLoading(false);
       }
     })();
-  }, [loggedIn]);
+  }, [user]);
 
   return { weekSchedule, loading };
 }

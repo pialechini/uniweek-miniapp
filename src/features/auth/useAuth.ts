@@ -1,13 +1,13 @@
 import { decode } from "@/lib/json-utils";
 import { signIn } from "@/lib/supabase";
 import { useEffect, useState } from "react";
+import { User } from "@supabase/supabase-js";
 
 export function useAuth(credentials?: string | null) {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     if (!credentials) {
-      setLoggedIn(false);
       return;
     }
 
@@ -18,13 +18,12 @@ export function useAuth(credentials?: string | null) {
       };
 
       (async () => {
-        const user = await signIn(email, password);
-        setLoggedIn(Boolean(user));
+        setUser(await signIn(email, password));
       })();
     } catch (error) {
-      setLoggedIn(false);
+      console.log(error);
     }
   }, [credentials]);
 
-  return loggedIn;
+  return user;
 }
