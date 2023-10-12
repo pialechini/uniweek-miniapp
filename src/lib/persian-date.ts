@@ -23,3 +23,15 @@ export function getCurrentWeekday() {
 export function getWeekdayName(index: number) {
   return WEEKDAYS[index];
 }
+
+export function isWorkingDay(dayIndex: types.DayIndex) {
+  return dayIndex < 5;
+}
+
+export function nextDayOf(dayIndex: types.DayIndex) {
+  return dayIndex === 6 ? 0 : ((dayIndex + 1) as types.DayIndex);
+}
+
+export function previousDayOf(dayIndex: types.DayIndex) {
+  return dayIndex === 0 ? 6 : ((dayIndex - 1) as types.DayIndex);
+}

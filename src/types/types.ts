@@ -11,3 +11,9 @@ export interface CourseSchedule {
     evenOdd: "even" | "odd" | null;
   }[];
 }
+
+export enum DayComparison {
+  BEFORE = -1,
+  SAME,
+  AFTER,
+}

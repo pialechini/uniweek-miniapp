@@ -1,6 +1,6 @@
 import * as types from "@/types/types";
 import supabase from "@/lib/supabase";
-import { getCurrentDay } from "@/lib/persian-date";
+import { getCurrentDay, isWorkingDay } from "@/lib/persian-date";
 import {
   intervalToDuration,
   isSaturday,
@@ -19,17 +19,16 @@ function isEvenWeekOrOdd(): "even" | "odd" {
     ? startDateOfTheTerm
     : previousSaturday(startDateOfTheTerm);
 
-  const saturdayOfTheWeek =
-    getCurrentDay() >= 5
-      ? nextSaturday(Date.now())
-      : previousSaturday(Date.now());
+  const saturdayOfTheWeek = isWorkingDay(getCurrentDay())
+    ? previousSaturday(Date.now())
+    : nextSaturday(Date.now());
 
-  const a = intervalToDuration({
+  const difference = intervalToDuration({
     start: firstSaturdayInTheTerm,
     end: saturdayOfTheWeek,
   });
 
-  const weekNumber = a.days! / 7 + 1;
+  const weekNumber = difference.days! / 7 + 1;
 
   return weekNumber % 2 === 0 ? "even" : "odd";
 }

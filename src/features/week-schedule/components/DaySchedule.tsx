@@ -1,9 +1,8 @@
 import * as types from "@/types/types";
 import ClassList from "@/features/week-schedule/components/ClassList";
 import styled from "styled-components";
-import { getCurrentDay, getWeekdayName } from "@/lib/persian-date";
 import { themeColor } from "@/theme/Theme";
-import { useMemo } from "react";
+import { getWeekdayName } from "@/lib/persian-date";
 
 const Container = styled.div`
   display: flex;
@@ -57,15 +56,17 @@ Weekday.defaultProps = {
  * ...
  * 3 means all classes are passed.
  */
-function calculatePassedClasses(today: number, dayIndex: number) {
+function calculatePassedClasses(
+  selectedDayComparedToToday: types.DayComparison
+) {
   const ALL_PASSED = 3;
   const NOTHING_PASSED = -1;
 
-  if (dayIndex < today) {
+  if (selectedDayComparedToToday === types.DayComparison.BEFORE) {
     return ALL_PASSED;
   }
 
-  if (dayIndex > today) {
+  if (selectedDayComparedToToday === types.DayComparison.AFTER) {
     return NOTHING_PASSED;
   }
 
@@ -90,13 +91,20 @@ function calculatePassedClasses(today: number, dayIndex: number) {
   return ALL_PASSED;
 }
 
-function DaySchedule({ classes, dayIndex }: DayScheduleProps) {
-  const today = useMemo(getCurrentDay, []);
-  const passedClasses = calculatePassedClasses(today, dayIndex);
+function DaySchedule({
+  classes,
+  selectedDay,
+  selectedDayComparedToToday,
+}: DayScheduleProps) {
+  const passedClasses = calculatePassedClasses(selectedDayComparedToToday);
 
   return (
     <Container>
-      <Weekday $active={dayIndex === today}>{getWeekdayName(dayIndex)}</Weekday>
+      <Weekday
+        $active={selectedDayComparedToToday === types.DayComparison.SAME}
+      >
+        {getWeekdayName(selectedDay)}
+      </Weekday>
       <ClassList {...{ classes, passedClasses }} />
     </Container>
   );
@@ -105,6 +113,7 @@ function DaySchedule({ classes, dayIndex }: DayScheduleProps) {
 export default DaySchedule;
 
 interface DayScheduleProps {
-  dayIndex: types.DayIndex;
+  selectedDay: types.DayIndex;
+  selectedDayComparedToToday: types.DayComparison;
   classes: types.Class[];
 }

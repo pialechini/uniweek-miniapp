@@ -2,7 +2,13 @@ import * as types from "@/types/types";
 import DaySchedule from "@/features/week-schedule/components/DaySchedule";
 import DaySwitcher from "@/features/week-schedule/components/DaySwitcher";
 import styled from "styled-components";
-import { getCurrentDay, getWeekdayName } from "@/lib/persian-date";
+import {
+  getCurrentDay,
+  getWeekdayName,
+  isWorkingDay,
+  nextDayOf,
+  previousDayOf,
+} from "@/lib/persian-date";
 import { useMemo, useState } from "react";
 
 const Container = styled.div`
@@ -18,24 +24,39 @@ const Container = styled.div`
   }
 `;
 
+function compareDays(day1: types.DayIndex, day2: types.DayIndex) {
+  return (day1 - day2) as types.DayComparison;
+}
+
 function WeekSchedule({ weekSchedule }: WeekScheduleProps) {
-  const [dayIndex, setDayIndex] = useState<number>(getCurrentDay());
   const today = useMemo(getCurrentDay, []);
+  const [selectedDay, setSelectedDay] = useState<types.DayIndex>(() => {
+    return isWorkingDay(today) ? today : 0; // return today or next saturday
+  });
 
   return (
     <Container>
       <DaySchedule
-        dayIndex={dayIndex as types.DayIndex}
-        classes={weekSchedule.at(dayIndex)!}
+        selectedDay={selectedDay}
+        selectedDayComparedToToday={compareDays(selectedDay, today)}
+        classes={weekSchedule.at(selectedDay)!}
       />
 
       <DaySwitcher
-        previous={dayIndex - 1 < 0 ? undefined : getWeekdayName(dayIndex - 1)}
-        next={dayIndex + 1 > 4 ? undefined : getWeekdayName(dayIndex + 1)}
-        showGoTodayButton={dayIndex !== today}
-        onPreviousButtonClick={() => setDayIndex((i) => i - 1)}
-        onNextButtonClick={() => setDayIndex((i) => i + 1)}
-        onGoTodayClick={() => setDayIndex(today)}
+        previous={
+          isWorkingDay(previousDayOf(selectedDay))
+            ? getWeekdayName(selectedDay - 1)
+            : undefined
+        }
+        next={
+          isWorkingDay(nextDayOf(selectedDay))
+            ? getWeekdayName(selectedDay + 1)
+            : undefined
+        }
+        onPreviousButtonClick={() => setSelectedDay((i) => previousDayOf(i))}
+        onNextButtonClick={() => setSelectedDay((i) => nextDayOf(i))}
+        showGoTodayButton={isWorkingDay(today) && selectedDay !== today}
+        onGoTodayClick={() => setSelectedDay(today)}
       />
     </Container>
   );
