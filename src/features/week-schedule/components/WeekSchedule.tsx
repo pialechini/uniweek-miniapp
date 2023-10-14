@@ -3,6 +3,7 @@ import DaySchedule from "@/features/week-schedule/components/DaySchedule";
 import DaySwitcher from "@/features/week-schedule/components/DaySwitcher";
 import styled from "styled-components";
 import {
+  compareDays,
   getCurrentDay,
   getWeekdayName,
   isWorkingDay,
@@ -24,10 +25,6 @@ const Container = styled.div`
   }
 `;
 
-function compareDays(day1: types.DayIndex, day2: types.DayIndex) {
-  return (day1 - day2) as types.DayComparison;
-}
-
 function WeekSchedule({ weekSchedule }: WeekScheduleProps) {
   const today = useMemo(getCurrentDay, []);
   const [selectedDay, setSelectedDay] = useState<types.DayIndex>(() => {
@@ -38,7 +35,11 @@ function WeekSchedule({ weekSchedule }: WeekScheduleProps) {
     <Container>
       <DaySchedule
         selectedDay={selectedDay}
-        selectedDayComparedToToday={compareDays(selectedDay, today)}
+        selectedDayComparedToToday={
+          isWorkingDay(today)
+            ? compareDays(selectedDay, today)
+            : types.DayComparison.AFTER
+        }
         classes={weekSchedule.at(selectedDay)!}
       />
 

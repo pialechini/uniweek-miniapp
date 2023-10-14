@@ -16,10 +16,6 @@ export function getCurrentDay() {
   return correctlyIndexedDay as types.DayIndex;
 }
 
-export function getCurrentWeekday() {
-  return WEEKDAYS[getCurrentDay()];
-}
-
 export function getWeekdayName(index: number) {
   return WEEKDAYS[index];
 }
@@ -34,4 +30,12 @@ export function nextDayOf(dayIndex: types.DayIndex) {
 
 export function previousDayOf(dayIndex: types.DayIndex) {
   return dayIndex === 0 ? 6 : ((dayIndex - 1) as types.DayIndex);
+}
+
+export function compareDays(day1: types.DayIndex, day2: types.DayIndex) {
+  return (
+    day1 === day2
+      ? types.DayComparison.SAME
+      : (day1 - day2) / Math.abs(day1 - day2)
+  ) as types.DayComparison;
 }
