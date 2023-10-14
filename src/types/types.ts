@@ -1,6 +1,4 @@
-export * from "@/theme/types";
-export * from "@/features/week-schedule/types";
-export * from "@/lib/types";
+import { defaultTheme } from "@/theme/defaultTheme";
 
 export interface CourseSchedule {
   name: string;
@@ -17,3 +15,17 @@ export enum DayComparison {
   SAME,
   AFTER,
 }
+
+export type Theme = typeof defaultTheme;
+export type ThemeColor = keyof typeof defaultTheme.colors;
+
+export type DayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
+export interface Class {
+  name: string | null;
+  location: string | null;
+}
+
+export type DaySchedule = Class[];
+
+export type WeekSchedule = DaySchedule[];
