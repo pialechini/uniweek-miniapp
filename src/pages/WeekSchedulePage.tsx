@@ -6,7 +6,6 @@ import { themeColor } from "@/theme/Theme";
 
 const Background = styled.div`
   width: 100vw;
-  height: 100dvh;
   background-color: ${themeColor("pageBackground")};
 `;
 
@@ -59,7 +58,16 @@ function WeekSchedulePage() {
   const { weekSchedule, loading } = useWeekSchedule();
 
   return (
-    <Background>
+    <Background
+      // instead of using 100dvh in css which is not widely supported by
+      // most of browsers currently, calculate the dvh size using JS
+      style={{
+        height: Math.max(
+          document.documentElement.clientHeight,
+          window.innerHeight || 0
+        ),
+      }}
+    >
       {loading ? (
         <Loader />
       ) : weekSchedule ? (
