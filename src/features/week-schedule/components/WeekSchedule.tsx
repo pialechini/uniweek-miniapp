@@ -27,8 +27,9 @@ const Container = styled.div`
 
 function WeekSchedule({ weekSchedule }: WeekScheduleProps) {
   const today = useMemo(getCurrentDay, []);
+  const isWorkingDayToday = isWorkingDay(today);
   const [selectedDay, setSelectedDay] = useState<types.DayIndex>(() => {
-    return isWorkingDay(today) ? today : 0; // return today or next saturday
+    return isWorkingDayToday ? today : 0; // return today or next saturday
   });
 
   return (
@@ -36,7 +37,7 @@ function WeekSchedule({ weekSchedule }: WeekScheduleProps) {
       <DaySchedule
         selectedDay={selectedDay}
         selectedDayComparedToToday={
-          isWorkingDay(today)
+          isWorkingDayToday
             ? compareDays(selectedDay, today)
             : types.DayComparison.AFTER
         }
@@ -56,8 +57,8 @@ function WeekSchedule({ weekSchedule }: WeekScheduleProps) {
         }
         onPreviousButtonClick={() => setSelectedDay((i) => previousDayOf(i))}
         onNextButtonClick={() => setSelectedDay((i) => nextDayOf(i))}
-        showGoTodayButton={isWorkingDay(today) && selectedDay !== today}
-        onGoTodayClick={() => setSelectedDay(today)}
+        showGoTodayButton={isWorkingDayToday && selectedDay !== today}
+        onGoTodayClick={() => isWorkingDayToday && setSelectedDay(today)}
       />
     </Container>
   );
