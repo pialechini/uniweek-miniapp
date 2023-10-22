@@ -1,4 +1,3 @@
-import { decode } from "@/lib/json-utils";
 import { signIn } from "@/lib/supabase";
 import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
@@ -12,7 +11,9 @@ export function useAuth(credentials?: string | null) {
     }
 
     try {
-      const { email, password } = decode(credentials) as {
+      const { email, password } = JSON.parse(
+        decodeURIComponent(credentials)
+      ) as {
         email: string;
         password: string;
       };

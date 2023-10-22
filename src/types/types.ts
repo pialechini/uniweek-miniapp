@@ -21,11 +21,11 @@ export type ThemeColor = keyof typeof defaultTheme.colors;
 
 export type DayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
-export interface Class {
-  name: string | null;
-  location: string | null;
+export interface UniClass {
+  name?: string;
+  location?: string;
 }
 
-export type DaySchedule = Class[];
+export type DaySchedule = Array<UniClass | null>;
 
 export type WeekSchedule = DaySchedule[];

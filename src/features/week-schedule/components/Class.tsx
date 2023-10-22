@@ -59,7 +59,7 @@ TimeBadge.defaultProps = {
   $fill: false,
 };
 
-const TIME_PERIODS = ["۰۸:۰۰", "۱۰:۰۰", "۱۴:۰۰", "۱۶:۰۰"];
+const TIME_PERIODS = ["۰۸:۰۰", "۱۰:۰۰", "۱۲:۰۰", "۱۴:۰۰", "۱۶:۰۰"];
 
 function Class({ index, name, location, isPassed }: ClassProps) {
   return (
@@ -77,7 +77,7 @@ function Class({ index, name, location, isPassed }: ClassProps) {
 
 export default Class;
 
-interface ClassProps extends types.Class {
-  index: 0 | 1 | 2 | 3;
+interface ClassProps extends types.UniClass {
+  index: 0 | 1 | 2 | 3 | 4;
   isPassed: boolean;
 }

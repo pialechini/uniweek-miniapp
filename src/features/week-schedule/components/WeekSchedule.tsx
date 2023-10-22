@@ -32,6 +32,8 @@ function WeekSchedule({ weekSchedule }: WeekScheduleProps) {
     return isWorkingDayToday ? today : 0; // return today or next saturday
   });
 
+  // console.log(weekSchedule);
+
   return (
     <Container>
       <DaySchedule

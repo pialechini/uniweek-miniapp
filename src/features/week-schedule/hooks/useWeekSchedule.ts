@@ -48,6 +48,8 @@ function useWeekSchedule() {
         return;
       }
 
+      console.log("before fetch", weekSchedule);
+
       try {
         const { data } = await supabase
           .from("week_schedule")
@@ -55,9 +57,13 @@ function useWeekSchedule() {
           .eq("user_id", user?.id)
           .single();
 
+        console.warn(data);
+
         isEvenWeekOrOdd() === "even"
           ? setWeekSchedule(JSON.parse(data?.even_week_schedule))
           : setWeekSchedule(JSON.parse(data?.odd_week_schedule));
+
+        console.log("after fetch", JSON.parse(data?.odd_week_schedule));
       } finally {
         setLoading(false);
       }

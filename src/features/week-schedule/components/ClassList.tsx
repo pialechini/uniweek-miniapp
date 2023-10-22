@@ -12,20 +12,20 @@ const StyledClassList = styled.div`
 
 function ClassList({ passedClasses, classes }: ClassListProps) {
   const thereIsNoClass = classes.every(
-    (universityClass) =>
-      universityClass.name == null && universityClass.location == null
+    (universityClass) => universityClass === null
   );
 
   return (
     <StyledClassList>
       {thereIsNoClass
         ? undefined
-        : classes.map(({ name, location }, index) => (
+        : classes.map((uniClass, index) => (
             <Class
               key={index}
-              index={index as 0 | 1 | 2 | 3}
+              index={index as 0 | 1 | 2 | 3 | 4}
               isPassed={index <= passedClasses}
-              {...{ name, location }}
+              name={uniClass ? uniClass.name : undefined}
+              location={uniClass ? uniClass.location : undefined}
             />
           ))}
     </StyledClassList>
@@ -36,5 +36,5 @@ export default ClassList;
 
 interface ClassListProps {
   passedClasses: number;
-  classes: types.Class[];
+  classes: types.DaySchedule;
 }

@@ -59,7 +59,7 @@ Weekday.defaultProps = {
 function calculatePassedClasses(
   selectedDayComparedToToday: types.DayComparison
 ) {
-  const ALL_PASSED = 3;
+  const ALL_PASSED = 4;
   const NOTHING_PASSED = -1;
 
   if (selectedDayComparedToToday === types.DayComparison.BEFORE) {
@@ -76,6 +76,7 @@ function calculatePassedClasses(
   const classEndings = [
     { endHour: 9, endMinute: 30 },
     { endHour: 11, endMinute: 30 },
+    { endHour: 14, endMinute: 0 },
     { endHour: 15, endMinute: 30 },
     { endHour: 17, endMinute: 30 },
   ];
@@ -115,5 +116,5 @@ export default DaySchedule;
 interface DayScheduleProps {
   selectedDay: types.DayIndex;
   selectedDayComparedToToday: types.DayComparison;
-  classes: types.Class[];
+  classes: types.DaySchedule;
 }
