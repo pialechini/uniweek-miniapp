@@ -2,7 +2,7 @@ import * as types from "@/types/types";
 import supabase from "@/lib/supabase";
 import { getCurrentDay, isWorkingDay } from "@/lib/persian-date";
 import {
-  intervalToDuration,
+  differenceInDays,
   isSaturday,
   nextSaturday,
   previousSaturday,
@@ -23,12 +23,9 @@ function isEvenWeekOrOdd(): "even" | "odd" {
     ? previousSaturday(Date.now())
     : nextSaturday(Date.now());
 
-  const difference = intervalToDuration({
-    start: firstSaturdayInTheTerm,
-    end: saturdayOfTheWeek,
-  });
-
-  const weekNumber = difference.days! / 7 + 1;
+  const weekNumber = Math.floor(
+    differenceInDays(saturdayOfTheWeek, firstSaturdayInTheTerm) / 7 + 1
+  );
 
   return weekNumber % 2 === 0 ? "even" : "odd";
 }
@@ -48,8 +45,6 @@ function useWeekSchedule() {
         return;
       }
 
-      console.log("before fetch", weekSchedule);
-
       try {
         const { data } = await supabase
           .from("week_schedule")
@@ -57,13 +52,9 @@ function useWeekSchedule() {
           .eq("user_id", user?.id)
           .single();
 
-        console.warn(data);
-
         isEvenWeekOrOdd() === "even"
           ? setWeekSchedule(JSON.parse(data?.even_week_schedule))
           : setWeekSchedule(JSON.parse(data?.odd_week_schedule));
-
-        console.log("after fetch", JSON.parse(data?.odd_week_schedule));
       } finally {
         setLoading(false);
       }
