@@ -13,14 +13,16 @@ import { useSearchParams } from "react-router-dom";
 
 const START_DATE_OF_THE_TERM = "2023/09/23";
 
+function sameOrPreviousSaturday(date: Date | number) {
+  return isSaturday(date) ? date : previousSaturday(date);
+}
+
 function isEvenWeekOrOdd(): "even" | "odd" {
   const startDateOfTheTerm = new Date(START_DATE_OF_THE_TERM);
-  const firstSaturdayInTheTerm = isSaturday(startDateOfTheTerm)
-    ? startDateOfTheTerm
-    : previousSaturday(startDateOfTheTerm);
+  const firstSaturdayInTheTerm = sameOrPreviousSaturday(startDateOfTheTerm);
 
   const saturdayOfTheWeek = isWorkingDay(getCurrentDay())
-    ? previousSaturday(Date.now())
+    ? sameOrPreviousSaturday(Date.now())
     : nextSaturday(Date.now());
 
   const weekNumber = Math.floor(
