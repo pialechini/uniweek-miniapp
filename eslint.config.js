@@ -14,7 +14,7 @@ export default [
   // Custom Rules
   {
     rules: {
-      'react/react-in-jsx-scope': false,
+      'react/react-in-jsx-scope': 'off',
     },
   },
 ];
