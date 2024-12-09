@@ -3,6 +3,15 @@
 /* -------------------------------------------------------------------------- */
 export type EvenOdd = 'even' | 'odd' | 'both';
 
+export type Weekday =
+  | 'شنبه'
+  | 'یکشنبه'
+  | 'دوشنبه'
+  | 'سه شنبه'
+  | 'چهارشنبه'
+  | 'پنجشنبه'
+  | 'جمعه';
+
 export type KlassSession = {
   klass: string;
   time: string;
