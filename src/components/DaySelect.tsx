@@ -13,7 +13,7 @@ type Props = {
 
 function DaySelect({ selectedDay, className, onClick }: Props) {
   return (
-    <div className={classNames(styles.daySelect, className)} onClick={onClick}>
+    <button className={classNames(styles.daySelect, className)} onClick={onClick}>
       <span className={styles.day}>{selectedDay}</span>
       <Icon
         className={styles.icon}
@@ -21,7 +21,7 @@ function DaySelect({ selectedDay, className, onClick }: Props) {
         path={mdiPencil}
         size={'24px'}
       />
-    </div>
+    </button>
   );
 }
 
