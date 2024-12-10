@@ -15,6 +15,7 @@ export default defineConfig({
     ],
   },
   server: {
+    host: true,
     proxy: {
       '^/api': {
         target: process.env.API_SERVER,
