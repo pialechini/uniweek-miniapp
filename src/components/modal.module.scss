@@ -27,6 +27,13 @@
   &::before {
     content: '';
     position: absolute;
+
+    /*
+      send modal background element to back to prevent 
+      disabling pointer events for the modal content
+    */
+    z-index: -1;
+
     inset: 0;
     border-radius: 2rem;
     border: 0.3rem solid transparent;

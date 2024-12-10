@@ -40,4 +40,14 @@ function useModalContext() {
   return context;
 }
 
-export { ModalProvider, useModalContext };
+function useModal() {
+  const context = useContext(ModalContext);
+
+  if (!context) {
+    throw new Error('Usage of ModalContext outside of its provider.');
+  }
+
+  return context.handleModal;
+}
+
+export { ModalProvider, useModalContext, useModal };

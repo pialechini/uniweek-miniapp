@@ -1,15 +1,62 @@
-.daySelectModal {
-}
-
 .title {
   font-weight: 900;
+  font-size: 1.8rem;
+}
+
+.weekday {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.weekdaysWrapper {
+  margin-top: 2.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rounded {
+  border-radius: 50%;
 }
 
 .circle {
-  border-radius: 50%;
-  
+  display: flow-root;
+  position: relative;
+  width: 2.4rem;
+  height: 2.4rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 2rem;
+    border: 0.3rem solid transparent;
+    background: linear-gradient(to bottom, #5e1dbb, #ef52bf) border-box;
+    mask:
+      linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+  }
+}
+
+.filled::before {
+  mask: unset;
 }
 
 .weekday {
   font-weight: 800;
+}
+
+.submitWrapper {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.submit {
+  padding: 0.4rem 2.8rem;
+  border-radius: 1.6rem;
+  background: linear-gradient(105deg, #48178e 6.49%, #f022b1 102.99%);
 }

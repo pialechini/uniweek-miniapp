@@ -2,21 +2,36 @@ import Card from '@/components/Card';
 import DaySelect from '@/components/DaySelect';
 import DaySelectModal from '@/components/DaySelectModal';
 import HeroSection from '@/components/HeroSection';
-import { useModalContext } from '@/contexts/ModalContext';
+import { useModal } from '@/contexts/ModalContext';
+import type { Weekday } from '@/types';
+import { useState } from 'react';
 
 import styles from './homePage.module.scss';
 
 function HomePage() {
-  const { handleModal } = useModalContext();
+  const handleModal = useModal();
+  const [day, setDay] = useState<Weekday>('شنبه');
 
   return (
     <div className={styles.homePage}>
       <HeroSection date={new Date()} evenOdd="زوج" percentage={12} />
+
       <DaySelect
         className={styles.day}
-        day="شنبه"
-        onClick={() => handleModal(<DaySelectModal />)}
+        day={day}
+        onClick={() =>
+          handleModal(
+            <DaySelectModal
+              initialSelectedDay={day}
+              onClose={(selectedDay) => {
+                setDay(selectedDay);
+                handleModal();
+              }}
+            />,
+          )
+        }
       />
+
       <div className={styles.grid}>
         <Card
           className={styles.card}
