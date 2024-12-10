@@ -14,6 +14,9 @@ importers:
       '@mdi/react':
         specifier: ^1.6.1
         version: 1.6.1
+      '@react-hooks-library/core':
+        specifier: ^0.6.2
+        version: 0.6.2(react@18.3.1)
       axios:
         specifier: ^1.7.8
         version: 1.7.8
@@ -519,6 +522,14 @@ packages:
   '@parcel/watcher@2.5.0':
     resolution: {integrity: sha512-i0GV1yJnm2n3Yq1qw6QrUrd/LI9bE8WEBOTtOkpCXHHdyN3TAGgqAK/DAT05z4fq2x04cARXt2pDmjWjL92iTQ==}
     engines: {node: '>= 10.0.0'}
+
+  '@react-hooks-library/core@0.6.2':
+    resolution: {integrity: sha512-Ca6ccj9mfUiQ0hbDJV0hzUaweZU7D0E5Xwtp3ba5oT6/yWj1tzoPe0y3AwGQyUSUKA5G6OADylU2fwEqZwrpNA==}
+    peerDependencies:
+      react: '>=16.9.0'
+
+  '@react-hooks-library/shared@0.6.2':
+    resolution: {integrity: sha512-tasvVgcoRhnHYZSVfQjDK7VDviVrO9BqqS/yEvjJ4/QRTVFQTNmt5Jfj3ym0Uju2B63Dc9892DuLhb9V9oysWA==}
 
   '@rollup/rollup-android-arm-eabi@4.28.0':
     resolution: {integrity: sha512-wLJuPLT6grGZsy34g4N1yRfYeouklTgPhH1gWXCYspenKYD0s3cR99ZevOGw5BexMNywkbV3UkjADisozBmpPQ==}
@@ -2173,6 +2184,13 @@ snapshots:
       '@parcel/watcher-win32-ia32': 2.5.0
       '@parcel/watcher-win32-x64': 2.5.0
     optional: true
+
+  '@react-hooks-library/core@0.6.2(react@18.3.1)':
+    dependencies:
+      '@react-hooks-library/shared': 0.6.2
+      react: 18.3.1
+
+  '@react-hooks-library/shared@0.6.2': {}
 
   '@rollup/rollup-android-arm-eabi@4.28.0':
     optional: true

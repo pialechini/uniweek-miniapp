@@ -1,14 +1,28 @@
 import { useModalContext } from '@/contexts/ModalContext';
 import { mdiClose } from '@mdi/js';
 import Icon from '@mdi/react';
+import { useClickOutside, useKeyDown } from '@react-hooks-library/core';
 import { motion } from 'motion/react';
+import { useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import styles from './modal.module.scss';
 
 function Modal() {
   const { isOpen, handleModal, modalContent } = useModalContext();
+  const modalEl = useRef<HTMLDialogElement | null>(null);
 
+  /** Add support for quick modal close when clicking outside
+   * or pressing the ESC key */
+  useClickOutside(modalEl, () => {
+    handleModal();
+  });
+
+  useKeyDown(['Escape'], (e) => {
+    handleModal();
+  });
+
+  /** Rendering Section */
   if (!isOpen) {
     return null;
   }
@@ -28,6 +42,7 @@ function Modal() {
             animate={{ scale: 1 }}
             exit={{ scale: 0.9 }}
             transition={{ duration: 0.3 }}
+            ref={modalEl}
           >
             {modalContent}
           </motion.dialog>

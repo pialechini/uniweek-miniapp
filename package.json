@@ -12,6 +12,7 @@
   "dependencies": {
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
+    "@react-hooks-library/core": "^0.6.2",
     "axios": "^1.7.8",
     "classnames": "^2.5.1",
     "motion": "^11.13.1",
