@@ -3,14 +3,19 @@ import DaySelect from '@/components/DaySelect';
 import DaySelectModal from '@/components/DaySelectModal';
 import HeroSection from '@/components/HeroSection';
 import { useModal } from '@/contexts/ModalContext';
+import { toWeekday } from '@/helpers/date';
 import type { Weekday } from '@/types';
 import { useState } from 'react';
 
 import styles from './homePage.module.scss';
 
-function HomePage() {
+type Props = {
+  today: Date;
+};
+
+function HomePage({ today }: Props) {
   const handleModal = useModal();
-  const [day, setDay] = useState<Weekday>('شنبه');
+  const [day, setDay] = useState<Weekday>(toWeekday(today));
 
   return (
     <div className={styles.homePage}>
