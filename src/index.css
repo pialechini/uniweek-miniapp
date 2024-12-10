@@ -77,6 +77,15 @@ h6 {
   user-select: none;
 }
 
+/* Disables the default tap highlight effect on touch devices */
+* {
+  /* For Safari and Chrome on mobile */
+  -webkit-tap-highlight-color: transparent;
+
+  /* Prevents accidental actions like double-tap zoom */
+  touch-action: manipulation;
+}
+
 ul,
 ol {
   list-style: none;
