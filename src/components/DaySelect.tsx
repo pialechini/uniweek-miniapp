@@ -6,15 +6,15 @@ import classNames from 'classnames';
 import styles from './daySelect.module.scss';
 
 type Props = {
-  day: Weekday;
+  selectedDay: Weekday;
   className?: string;
   onClick: () => void;
 };
 
-function DaySelect({ day, className, onClick }: Props) {
+function DaySelect({ selectedDay, className, onClick }: Props) {
   return (
     <div className={classNames(styles.daySelect, className)} onClick={onClick}>
-      <span className={styles.day}>{day}</span>
+      <span className={styles.day}>{selectedDay}</span>
       <Icon
         className={styles.icon}
         color={'#FFB700'}

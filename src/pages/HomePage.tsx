@@ -15,7 +15,7 @@ type Props = {
 
 function HomePage({ today }: Props) {
   const handleModal = useModal();
-  const [day, setDay] = useState<Weekday>(toWeekday(today));
+  const [weekday, setWeekday] = useState<Weekday>(toWeekday(today));
 
   return (
     <div className={styles.homePage}>
@@ -23,13 +23,13 @@ function HomePage({ today }: Props) {
 
       <DaySelect
         className={styles.day}
-        day={day}
+        selectedDay={weekday}
         onClick={() =>
           handleModal(
             <DaySelectModal
-              initialSelectedDay={day}
+              initialSelectedDay={weekday}
               onClose={(selectedDay) => {
-                setDay(selectedDay);
+                setWeekday(selectedDay);
                 handleModal();
               }}
             />,
