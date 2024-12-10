@@ -1,14 +1,14 @@
 import Routes from '@/Routes';
-import Providers from '@/contexts/Providers';
+import GlobalProviders from '@/contexts/GlobalProviders';
 import Layout from '@/pages/Layout';
 
 function App() {
   return (
-    <Providers>
+    <GlobalProviders>
       <Layout>
         <Routes />
       </Layout>
-    </Providers>
+    </GlobalProviders>
   );
 }
 
