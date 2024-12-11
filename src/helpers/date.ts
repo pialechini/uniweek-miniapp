@@ -1,7 +1,7 @@
 import { Weekday } from '@/types';
 import { differenceInDays, isSaturday, previousSaturday } from 'date-fns';
 
-function formatPersianDate(date: Date) {
+export function formatPersianDate(date: Date) {
   return date.toLocaleDateString('fa-IR', {
     month: 'long',
     day: 'numeric',
@@ -9,7 +9,7 @@ function formatPersianDate(date: Date) {
   });
 }
 
-function toWeekday(date: Date) {
+export function toWeekday(date: Date) {
   return date.toLocaleDateString('fa-IR', {
     weekday: 'long',
   }) as Weekday;
@@ -28,5 +28,3 @@ export function getWeekParity(today: Date, startOfTerm: Date): 'even' | 'odd' {
 
   return weekNumber % 2 === 0 ? 'even' : 'odd';
 }
-
-export { formatPersianDate, toWeekday };
