@@ -1,13 +1,11 @@
-import Routes from '@/Routes';
+import router from '@/Router';
 import GlobalProviders from '@/contexts/GlobalProviders';
-import Layout from '@/pages/Layout';
+import { RouterProvider } from 'react-router-dom';
 
 function App() {
   return (
     <GlobalProviders>
-      <Layout>
-        <Routes />
-      </Layout>
+      <RouterProvider router={router} />
     </GlobalProviders>
   );
 }

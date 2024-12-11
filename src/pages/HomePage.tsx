@@ -4,8 +4,9 @@ import DaySelectModal from '@/components/DaySelectModal';
 import HeroSection from '@/components/HeroSection';
 import { useModal } from '@/contexts/ModalContext';
 import { toWeekday } from '@/helpers/date';
-import type { Weekday } from '@/types';
+import type { WeekSchedule, Weekday } from '@/types';
 import { useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
 
 import styles from './homePage.module.scss';
 
@@ -16,6 +17,8 @@ type Props = {
 function HomePage({ today }: Props) {
   const handleModal = useModal();
   const [weekday, setWeekday] = useState<Weekday>(toWeekday(today));
+
+  const weekSchedule = useLoaderData() as WeekSchedule;
 
   return (
     <div className={styles.homePage}>

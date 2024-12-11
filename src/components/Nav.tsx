@@ -2,6 +2,7 @@ import { mdiAccountMultiple, mdiCalendarBlank, mdiHome } from '@mdi/js';
 import Icon from '@mdi/react';
 import { motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './nav.module.scss';
 
@@ -9,9 +10,15 @@ let initialCircleCenterX = 0;
 let initialCircleCenterY = 0;
 let circleWidth = 0;
 
+const NAV_ITEMS = [
+  { route: '/shared', icon: mdiAccountMultiple },
+  { route: '/', icon: mdiHome },
+  { route: '/calendar', icon: mdiCalendarBlank },
+] as const;
+
 function Nav() {
   const [circleX, setCircleX] = useState<number | string>('-50%');
-  const navItemsRef = useRef<HTMLDivElement[]>([]);
+  const navItemsRef = useRef<HTMLAnchorElement[]>([]);
   const [activeItemIndex, setActiveItemIndex] = useState<number>(-1);
 
   const handleNavClick = (index: number) => {
@@ -26,7 +33,7 @@ function Nav() {
 
   useEffect(() => {
     setActiveItemIndex(1);
-  }, []) 
+  }, []);
 
   return (
     <div className={styles.navbar}>
@@ -51,31 +58,35 @@ function Nav() {
       ></motion.div>
 
       {/* Nav Items */}
-      {[mdiAccountMultiple, mdiHome, mdiCalendarBlank].map((icon, index) => (
-        <motion.div
-          key={index}
+      {NAV_ITEMS.map((item, index) => (
+        <Link
           className={styles.navItem}
-          ref={(el) => (navItemsRef.current[index] = el!)}
+          to={item.route}
+          key={item.route}
           onClick={() => handleNavClick(index as number)}
-          animate={{
-            y:
-              activeItemIndex === index
-                ? initialCircleCenterY -
-                  navItemsRef.current[index]?.getBoundingClientRect()?.top -
-                  25
-                : 0,
-          }}
-          transition={{
-            type: 'tween',
-            ease: 'backOut',
-          }}
+          ref={(el) => (navItemsRef.current[index] = el!)}
         >
-          <Icon
-            path={icon}
-            color={activeItemIndex === index ? '#FFB700' : '#110729'}
-            size={'30px'}
-          />
-        </motion.div>
+          <motion.div
+            animate={{
+              y:
+                activeItemIndex === index
+                  ? initialCircleCenterY -
+                    navItemsRef.current[index]?.getBoundingClientRect()?.top -
+                    25
+                  : 0,
+            }}
+            transition={{
+              type: 'tween',
+              ease: 'backOut',
+            }}
+          >
+            <Icon
+              path={item.icon}
+              color={activeItemIndex === index ? '#FFB700' : '#110729'}
+              size={'30px'}
+            />
+          </motion.div>
+        </Link>
       ))}
     </div>
   );

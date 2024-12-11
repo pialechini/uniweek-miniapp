@@ -8,8 +8,6 @@ function AssignPage() {
 
   useEffect(() => {
     if (token) {
-      console.log(token);
-
       setInLocalStorage('token', token);
       navigate('/');
     }
