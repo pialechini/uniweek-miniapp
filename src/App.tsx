@@ -1,4 +1,4 @@
-import router from '@/Router';
+import router from '@/router';
 import GlobalProviders from '@/contexts/GlobalProviders';
 import { RouterProvider } from 'react-router-dom';
 
