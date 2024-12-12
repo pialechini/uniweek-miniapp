@@ -1,14 +1,15 @@
-import { setInLocalStorage } from '@/helpers/localStorage';
+import { useAuthContext } from '@/contexts/AuthContext';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function AssignPage() {
   const { token } = useParams();
   const navigate = useNavigate();
+  const { setToken } = useAuthContext();
 
   useEffect(() => {
     if (token) {
-      setInLocalStorage('token', token);
+      setToken(token);
       navigate('/');
     }
   }, [token, navigate]);
