@@ -25,7 +25,7 @@ const router = createHashRouter([
 
           return await fetchWeekSchedule(token);
         },
-
+        // TODO
         errorElement: <div>TOKEN NOT FOUND</div>,
       },
       {
