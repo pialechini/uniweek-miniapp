@@ -34,7 +34,6 @@ function DaySelectModal({ initialSelectedDay, onClose }: DaySelectModalProps) {
     'سه‌شنبه',
     'چهارشنبه',
     'پنجشنبه',
-    'جمعه',
   ];
 
   const [selectedDay, setSelectedDay] =

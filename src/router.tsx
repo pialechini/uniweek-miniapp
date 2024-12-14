@@ -12,7 +12,7 @@ const router = createHashRouter([
     element: <Layout />,
     children: [
       {
-        index: true,
+        path: '/home',
         element: (
           <AuthGaurd>
             <HomePage today={new Date()} />

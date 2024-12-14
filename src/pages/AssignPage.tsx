@@ -10,7 +10,7 @@ function AssignPage() {
   useEffect(() => {
     if (token) {
       setToken(token);
-      navigate('/');
+      navigate('/home');
     }
   }, [token, navigate]);
 
