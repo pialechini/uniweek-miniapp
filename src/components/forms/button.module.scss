@@ -1,0 +1,16 @@
+$bgTransparent: linear-gradient(var(--color-bg), var(--color-bg));
+
+.button {
+  padding: 1.6rem 3.2rem;
+  border: double 0.3rem transparent;
+  border-radius: 2rem;
+  background-image: $bgTransparent, linear-gradient(to right, #5e1dbb, #ef52bf);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  text-align: center;
+
+  &:hover {
+    background-image: linear-gradient(95deg, #5e1dbb 36.97%, #ef52bf 171.82%),
+      linear-gradient(95deg, #5e1dbb 36.97%, #ef52bf 171.82%);
+  }
+}

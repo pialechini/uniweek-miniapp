@@ -13,7 +13,7 @@ let circleWidth = 0;
 const NAV_ITEMS = [
   { route: '/shared', icon: mdiAccountMultiple },
   { route: '/home', icon: mdiHome },
-  { route: '/calendar', icon: mdiCalendarBlank },
+  { route: '/klass/new', icon: mdiCalendarBlank },
 ] as const;
 
 function Nav() {

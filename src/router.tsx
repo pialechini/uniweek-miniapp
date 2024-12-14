@@ -3,6 +3,7 @@ import { token } from '@/contexts/AuthContext';
 import AssignPage from '@/pages/AssignPage';
 import HomePage from '@/pages/HomePage';
 import Layout from '@/pages/Layout';
+import NewSession from '@/pages/NewSession';
 import { fetchWeekSchedule } from '@/services/weekScheduleApi';
 import { createHashRouter } from 'react-router-dom';
 
@@ -23,10 +24,16 @@ const router = createHashRouter([
             throw new Error('token not found');
           }
 
+          // TODO
           return await fetchWeekSchedule(token);
         },
+
         // TODO
         errorElement: <div>TOKEN NOT FOUND</div>,
+      },
+      {
+        path: '/klass/new',
+        element: <NewSession />,
       },
       {
         path: 'assign/:token/',

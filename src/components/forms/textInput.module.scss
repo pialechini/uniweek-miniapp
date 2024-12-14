@@ -1,0 +1,24 @@
+$bgTransparent: linear-gradient(var(--color-bg), var(--color-bg));
+
+.textInput {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.4rem;
+
+  border: double 0.3rem transparent;
+  border-radius: 2rem;
+  background-image: $bgTransparent, linear-gradient(to right, #5e1dbb, #ef52bf);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+
+  input {
+    width: 100%;
+    color: #fff;
+  }
+
+  &:hover {
+    background-image: $bgTransparent,
+      linear-gradient(to right, #ef52bf, #ef52bf);
+  }
+}
