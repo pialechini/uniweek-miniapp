@@ -1,4 +1,4 @@
-import { getFromLocalStorage } from '@/helpers';
+import { getFromLocalStorage, setInLocalStorage } from '@/helpers';
 import { signIn } from '@/services/supabase';
 import { PropsWithChildren, createContext, useContext, useEffect } from 'react';
 import { useState } from 'react';
@@ -33,6 +33,7 @@ function AuthProvider({ children }: PropsWithChildren) {
     loggedIn,
     setToken: (newToken: string) => {
       token = newToken;
+      setInLocalStorage('token', newToken);
       login();
     },
     login,
