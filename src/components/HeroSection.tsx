@@ -2,14 +2,14 @@ import CircularProgressBar from '@/components/chart/circularProgressBar';
 import BooksIcon from '@/components/icons/BooksIcon';
 import ManLogo from '@/components/logos/ManLogo';
 import { formatPersianDate } from '@/helpers/date';
-import { toPersianNumber } from '@/helpers/numbers';
+import { replaceWithPersianNumbers } from '@/helpers/numbers';
 
 import styles from './heroSection.module.scss';
 
 type Props = {
   date: Date;
   evenOdd: string;
-  percentage: number; 
+  percentage: number;
 };
 
 function HeroSection({ date, evenOdd, percentage }: Props) {
@@ -22,7 +22,7 @@ function HeroSection({ date, evenOdd, percentage }: Props) {
       <CircularProgressBar
         containerClassName={styles.progressBar}
         value={percentage}
-        text={toPersianNumber(percentage) + '٪'}
+        text={replaceWithPersianNumbers(`${percentage}٪`)}
       />
     </div>
   );
