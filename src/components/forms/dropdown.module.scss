@@ -1,0 +1,35 @@
+.dropdown {
+  position: relative;
+  width: 100%;
+  padding: 2rem 2.4rem;
+
+  /* Gradient rounded border */
+  border: double 0.3rem transparent;
+  border-radius: 2rem;
+  background-image: linear-gradient(var(--color-bg), var(--color-bg)),
+    linear-gradient(to right, #5e1dbb, #ef52bf);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.options {
+  overflow: hidden; /* Prevent content beeliding */
+  margin-bottom: 4rem; /* The gap between collapse the icon and options */
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.collapseIcon {
+  position: absolute;
+  bottom: 2rem;
+  left: 2.4rem;
+}

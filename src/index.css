@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
+
+
+/* -------------------------------------------------------------------------- */
+/*                              Modern CSS Reset                              */
+/* ref: https://www.joshwcomeau.com/css/custom-css-reset/                     */
+/* -------------------------------------------------------------------------- */
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/*                                  My Resets                                 */
+/* -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+/* Disables the default tap highlight effect on touch devices */
+* {
+  /* For Safari and Chrome on mobile */
+  -webkit-tap-highlight-color: transparent;
+
+  /* Prevents accidental actions like double-tap zoom */
+  touch-action: manipulation;
+}
+
+ul,
+ol {
+  list-style: none;
+  /* Removes Makers */
+}
+
+dialog {
+  background: transparent;
+  border: none;
+  color: inherit;
+}
+
+button {
+  appearance: none;
+  border-radius: 0;
+  text-align: inherit;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  color: inherit;
+}
+
+input {
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                               General Styles                               */
+/* -------------------------------------------------------------------------- */
+html {
+  font-size: 62.5%;
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+body {
+  font-size: 16px;
+  color: white;
+  height: 100dvh;
+}
+
+:root {
+  --color-bg: #110729
+}

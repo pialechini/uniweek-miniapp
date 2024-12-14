@@ -1,31 +1,60 @@
-import { defaultTheme } from "@/theme/defaultTheme";
+/* -------------------------------------------------------------------------- */
+/*                            Domain Defined Types                            */
+/* -------------------------------------------------------------------------- */
+export type EvenOdd = 'even' | 'odd' | 'both';
 
-export interface CourseSchedule {
-  name: string;
-  teacher: string;
-  days: {
-    location: string;
-    time: string;
-    evenOdd: "even" | "odd" | null;
-  }[];
-}
+export type Weekday =
+  | 'شنبه'
+  | 'یکشنبه'
+  | 'دوشنبه'
+  | 'سه‌شنبه'
+  | 'چهارشنبه'
+  | 'پنجشنبه'
+  | 'جمعه';
 
-export enum DayComparison {
-  BEFORE = -1,
-  SAME,
-  AFTER,
-}
+export type KlassSession = {
+  klass: string;
+  time: string;
+  location: string;
+};
 
-export type Theme = typeof defaultTheme;
-export type ThemeColor = keyof typeof defaultTheme.colors;
+export type KlassSessionTime = {
+  start: string;
+  end: string;
+};
 
-export type DayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+export type DaySchedule = Array<KlassSession>;
+export type Schedule = Array<DaySchedule>;
 
-export interface UniClass {
-  name?: string;
-  location?: string;
-}
+export type WeekSchedule = {
+  even_weeks_schedule: Schedule;
+  odd_weeks_schedule: Schedule;
+};
 
-export type DaySchedule = Array<UniClass | null>;
+/* -------------------------------------------------------------------------- */
+/*                                     API                                    */
+/* -------------------------------------------------------------------------- */
+export type CreateKlassSessionRequest = {
+  klass: string;
+  day: number;
+  time: string;
+  location: string;
+  even_odd: string;
+};
 
-export type WeekSchedule = DaySchedule[];
+export type CreateKlassSessionResponse = {
+  message: string;
+};
+
+export type UpdateKlassSessionRequest = {
+  day: number;
+  time: string;
+  even_odd: string;
+  updatedSession: Partial<KlassSession>;
+};
+
+export type deleteKlassSessionRequest = {
+  day: number;
+  even_odd: string;
+  time: string;
+};

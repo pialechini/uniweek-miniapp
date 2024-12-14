@@ -1,0 +1,22 @@
+.daySelect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 15px;
+  background: #8f1eb0;
+  width: 14.8rem;
+  height: 4.7rem;
+}
+
+.day {
+  font-size: 2.4rem;
+  font-weight: 900;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(40%, -40%);
+}

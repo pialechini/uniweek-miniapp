@@ -1,1 +1,1 @@
-# uniweek-miniapp
+# Uniweek Miniapp

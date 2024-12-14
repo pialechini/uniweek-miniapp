@@ -1,20 +1,11 @@
-import App from "./App";
-import React from "react";
-import ReactDOM from "react-dom/client";
-import WeekSchedule from "@/pages/WeekSchedulePage";
-import { createHashRouter, RouterProvider } from "react-router-dom";
-import "./fonts.css";
+import App from '@/App.tsx';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 
-const router = createHashRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [{ path: "week-schedule", element: <WeekSchedule /> }],
-  },
-]);
+import './index.css';
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
 );

@@ -1,13 +1,12 @@
-import GlobalStyles from "@/theme/GlobalStyles.tsx";
-import Theme from "@/theme/Theme.tsx";
-import { Outlet } from "react-router-dom";
+import router from '@/router';
+import GlobalProviders from '@/contexts/GlobalProviders';
+import { RouterProvider } from 'react-router-dom';
 
 function App() {
   return (
-    <Theme>
-      <GlobalStyles />
-      <Outlet />
-    </Theme>
+    <GlobalProviders>
+      <RouterProvider router={router} />
+    </GlobalProviders>
   );
 }
 

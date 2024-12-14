@@ -1,0 +1,40 @@
+.navbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // overflow: hidden;
+  border-radius: 25px 25px 0px 0px;
+  background: #b1a5b7;
+  backdrop-filter: blur(150px);
+}
+
+.navItem {
+  flex: 1;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.activeCircle {
+  position: absolute;
+  left: 50%;
+  bottom: 1.2rem;
+  width: 8rem;
+  height: 8rem;
+  background: #110729;
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+}

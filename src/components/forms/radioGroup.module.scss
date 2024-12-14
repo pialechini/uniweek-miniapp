@@ -1,0 +1,45 @@
+.radioGroup {
+  margin-top: 2.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.rounded {
+  border-radius: 50%;
+}
+
+.circle {
+  display: flow-root;
+  position: relative;
+  width: 2.4rem;
+  height: 2.4rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 2rem;
+    border: 0.3rem solid transparent;
+    background: linear-gradient(to bottom, #5e1dbb, #ef52bf) border-box;
+    mask:
+      linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+  }
+}
+
+.filled::before {
+  mask: unset;
+}
+
+.item {
+  font-weight: 800;
+}

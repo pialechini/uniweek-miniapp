@@ -1,0 +1,76 @@
+.container {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.rounded {
+  border-radius: 2rem;
+}
+
+.modal {
+  width: 90vw;
+  padding: 2.6rem;
+  max-width: 36rem;
+  display: flow-root;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+
+    /*
+      send modal background element to back to prevent 
+      disabling pointer events for the modal content
+    */
+    z-index: -1;
+
+    inset: 0;
+    border-radius: 2rem;
+    border: 0.3rem solid transparent;
+    background: linear-gradient(to right, #5e1dbb, #ef52bf) border-box;
+    mask:
+      linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+  }
+}
+
+.header {
+  font-size: 1.2rem;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.close {
+  position: absolute;
+  top: -1.8rem;
+  right: 0;
+  z-index: 100;
+}
+
+.submit {
+  background: linear-gradient(90deg, #ff007c, #8400ff);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
