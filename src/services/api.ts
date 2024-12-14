@@ -2,7 +2,6 @@ import { getFromLocalStorage } from '@/helpers/localStorage';
 import axios, { type AxiosResponse } from 'axios';
 
 const api = axios.create({
-  // baseURL for production/local enironments
   baseURL:
     window.location.hostname === 'pialechini.github.io'
       ? // production
