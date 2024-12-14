@@ -15,11 +15,13 @@ function ModalProvider({ children }: PropsWithChildren) {
   const [modalContent, setModalContent] = useState<ReactNode>();
 
   const handleModal = (content?: ReactNode) => {
-    setOpen((isOpen) => !isOpen);
-
-    if (content) {
-      setModalContent(content);
+    if (!content) {
+      setOpen(false);
+      return;
     }
+
+    setOpen(true);
+    setModalContent(content);
   };
 
   return (
