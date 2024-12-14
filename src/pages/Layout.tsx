@@ -17,7 +17,9 @@ function Layout() {
   return (
     <div className={styles.appWrapper}>
       <div className={styles.appContent}>
-        {isLoading ? <LoadingPage /> : <Outlet />}
+        <div className={styles.pageContent}>
+          {isLoading ? <LoadingPage /> : <Outlet />}
+        </div>
         <Nav />
       </div>
     </div>
