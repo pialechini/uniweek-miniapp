@@ -28,3 +28,31 @@ export function getWeekParity(today: Date, startOfTerm: Date): 'even' | 'odd' {
 
   return weekNumber % 2 === 0 ? 'even' : 'odd';
 }
+
+export function getStartOfTerm() {
+  return new Date('2024-09-22T00:00:00+03:30');
+}
+
+export function weekdayIndex(weekday: Weekday) {
+  const weekdays: Weekday[] = [
+    'شنبه',
+    'یکشنبه',
+    'دوشنبه',
+    'سه‌شنبه',
+    'چهارشنبه',
+    'پنجشنبه',
+    'جمعه',
+  ];
+
+  return weekdays.indexOf(weekday);
+}
+
+export function parseTime(time: string) {
+  const [startTime, endTime] = time.split('-');
+
+  if (!startTime || !endTime) {
+    throw new Error('invalid time format: ' + time);
+  }
+
+  return [startTime, endTime];
+}
