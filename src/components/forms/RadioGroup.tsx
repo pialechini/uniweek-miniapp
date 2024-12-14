@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { ReactNode, useState } from 'react';
 
-import styles from './select.module.scss';
+import styles from './radioGroup.module.scss';
 
-type ItemProps = {
+type RadioItemProps = {
   selected: boolean;
   content: ReactNode;
   onSelect: () => void;
@@ -12,27 +12,31 @@ type ItemProps = {
 type Props = {
   items: ReactNode[];
   intialSelectedItemIndex: number;
+  className?: string;
   onChange: (selectedItemIndex: number) => void;
 };
 
-function Item({ content, selected, onSelect }: ItemProps) {
+function RadioItem({ content, selected, onSelect }: RadioItemProps) {
   return (
-    <div className={styles.select} onClick={onSelect}>
-      <div className={styles.item}>
-        <div className={classNames(styles.circle, selected && styles.filled)} />
-      </div>
+    <div className={styles.item} onClick={onSelect}>
+      <div className={classNames(styles.circle, selected && styles.filled)} />
       <div className={styles.weekday}>{content}</div>
     </div>
   );
 }
 
-function Select({ items, intialSelectedItemIndex, onChange }: Props) {
+function RadioGroup({
+  className,
+  items,
+  intialSelectedItemIndex,
+  onChange,
+}: Props) {
   const [selectedItem, setSelectedItem] = useState(intialSelectedItemIndex);
 
   return (
-    <div className={styles.itemsWrapper}>
+    <div className={classNames(styles.radioGroup, className)}>
       {items.map((item, i) => (
-        <Item
+        <RadioItem
           key={i}
           selected={selectedItem === i}
           content={item}
@@ -46,4 +50,4 @@ function Select({ items, intialSelectedItemIndex, onChange }: Props) {
   );
 }
 
-export default Select;
+export default RadioGroup;

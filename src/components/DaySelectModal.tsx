@@ -1,4 +1,4 @@
-import Select from '@/components/forms/Select';
+import RadioGroup from '@/components/forms/RadioGroup';
 import { weekdays } from '@/helpers';
 import type { Weekday as WeekdayType } from '@/types';
 import { useState } from 'react';
@@ -18,7 +18,7 @@ function DaySelectModal({ initialSelectedDay, onClose }: Props) {
     <div>
       <p className={styles.title}>روز هفته را مشخص کنید</p>
 
-      <Select
+      <RadioGroup
         items={weekdays}
         intialSelectedItemIndex={weekdays.indexOf(initialSelectedDay)}
         onChange={(selectedItemIndex) =>
