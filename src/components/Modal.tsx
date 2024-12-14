@@ -18,7 +18,7 @@ function Modal() {
     handleModal();
   });
 
-  useKeyDown(['Escape'], (e) => {
+  useKeyDown(['Escape'], () => {
     handleModal();
   });
 

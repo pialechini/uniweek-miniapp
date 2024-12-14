@@ -64,7 +64,9 @@ function Nav() {
           to={item.route}
           key={item.route}
           onClick={() => handleNavClick(index as number)}
-          ref={(el) => (navItemsRef.current[index] = el!)}
+          ref={(el) => {
+            navItemsRef.current[index] = el!;
+          }}
         >
           <motion.div
             animate={{
