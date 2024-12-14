@@ -66,16 +66,12 @@
   animation: blurPulse 1.8s infinite;
 }
 
-.wrapper {
-  position: absolute;
-  top: 1.2rem;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.logo {
-  margin-bottom: 2rem;
-  position: relative;
+.column {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
 }
 
 .text {
@@ -84,8 +80,12 @@
   font-size: 4rem;
   font-weight: 400;
   text-align: center;
-  position: absolute;
-  bottom: 3rem;
-  left: 50%;
-  transform: translateX(-50%);
+}
+
+.version {
+  color: #e2209e;
+  font-family: Inter;
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
 }
