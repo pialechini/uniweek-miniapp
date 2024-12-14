@@ -56,3 +56,12 @@ export function parseTime(time: string) {
 
   return [startTime, endTime];
 }
+
+export const weekdays: Weekday[] = [
+  'شنبه',
+  'یکشنبه',
+  'دوشنبه',
+  'سه‌شنبه',
+  'چهارشنبه',
+  'پنجشنبه',
+] as const;
