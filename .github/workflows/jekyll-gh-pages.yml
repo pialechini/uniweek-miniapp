@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   # Trigger workflow on pushes to the main branch
   push:
-    branches: ["main"]
+    branches: ['main']
 
   # Allow manual triggering from the Actions tab
   workflow_dispatch:
@@ -16,13 +16,8 @@ permissions:
 
 # Ensures only one deployment at a time to prevent conflicts
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
-
-jobs:
-name: pnpm Example Workflow
-on:
-  push:
 
 jobs:
   build:
@@ -30,27 +25,27 @@ jobs:
       matrix:
         node-version: [22]
     steps:
-    - uses: actions/checkout@v4
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 9
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
-    - name: Install dependencies
-      run: pnpm install
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
 
-    - name: Build the project
-      run: pnpm build
+      - name: Build the project
+        run: pnpm build
 
-    # Upload build output as an artifact for deployment
-    - name: Upload build output
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: ./dist # Path to the build directory
+      # Upload build output as an artifact for deployment
+      - name: Upload build output
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist # Path to the build directory
 
   # Deployment job
   deploy:
