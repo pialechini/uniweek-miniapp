@@ -44,7 +44,7 @@ jobs:
       run: pnpm install
 
     - name: Build the project
-        run: pnpm build
+      run: pnpm build
 
     # Upload build output as an artifact for deployment
     - name: Upload build output
