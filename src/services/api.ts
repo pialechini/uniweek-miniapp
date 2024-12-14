@@ -2,7 +2,12 @@ import { getFromLocalStorage } from '@/helpers/localStorage';
 import axios, { type AxiosResponse } from 'axios';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL:
+    window.location.hostname === 'pialechini.github.io'
+      ? // production
+        'https://express-b6gufp.chbk.app/api'
+      : //local
+        '/api',
   timeout: 3000,
   headers: {
     'Content-Type': 'application/json',
@@ -17,7 +22,9 @@ api.interceptors.request.use(
 
       if (!token) {
         return Promise.reject(
-          new axios.Cancel('Token is missing in local storage; request aborted'),
+          new axios.Cancel(
+            'Token is missing in local storage; request aborted',
+          ),
         );
       }
 
