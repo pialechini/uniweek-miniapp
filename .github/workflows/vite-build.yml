@@ -24,12 +24,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: 'pnpm' # Cache pnpm dependencies
+          node-version: 20
 
-      # Step 3: Install pnpm
-      - name: Install pnpm
-        run: npm install -g pnpm
+      # Step 3: Set up pnpm
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2.2.4 # Use the official pnpm setup action
+        with:
+          version: 8 # Specify your desired pnpm version (e.g., 8 or latest stable)
 
       # Step 4: Install dependencies with pnpm
       - name: Install Dependencies
@@ -43,7 +44,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./build # Replace with your build output folder (e.g., "dist" or "build")
+          path: ./dist # Replace with your build output folder (e.g., "dist" or "build")
 
       # Step 7: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
