@@ -13,8 +13,13 @@
 
 .grid {
   display: grid;
+  direction: ltr;
   gap: 4rem 2rem;
   grid-template: auto / 1fr 1fr;
   margin-top: 3.2rem;
   max-height: 40rem;
+}
+
+.noKlass {
+  margin-top: 3.2rem;
 }

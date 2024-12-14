@@ -3,6 +3,7 @@ import DaySelect from '@/components/DaySelect';
 import DaySelectModal from '@/components/DaySelectModal';
 import HeroSection from '@/components/HeroSection';
 import { useModal } from '@/contexts/ModalContext';
+import { replaceWithPersianNumbers } from '@/helpers';
 import {
   getStartOfTerm,
   getWeekParity,
@@ -44,9 +45,11 @@ function HomePage({ today }: Props) {
 
   const fetchedWeekSchedule = useLoaderData() as WeekSchedule;
 
+  const weekParity = getWeekParity(today, getStartOfTerm());
+
   const todaySchedule = useMemo(() => {
     const thisWeekSchedule =
-      getWeekParity(today, getStartOfTerm()) === 'even'
+      weekParity === 'even'
         ? fetchedWeekSchedule.even_weeks_schedule
         : fetchedWeekSchedule.odd_weeks_schedule;
 
@@ -57,7 +60,7 @@ function HomePage({ today }: Props) {
     <div className={styles.homePage}>
       <HeroSection
         date={today}
-        evenOdd="زوج"
+        evenOdd={weekParity === 'even' ? 'زوج' : 'فرد'}
         percentage={calculatePassedPercentage(today, todaySchedule)}
       />
 
@@ -77,25 +80,23 @@ function HomePage({ today }: Props) {
         }
       />
 
-      <div className={styles.grid}>
-        {todaySchedule &&
-          todaySchedule.map((session) => (
+      {todaySchedule && todaySchedule.length !== 0 ? (
+        <div className={styles.grid}>
+          {todaySchedule.map((session) => (
             <Card
               key={session.time}
               className={styles.card}
               klass={session.klass}
               location={session.location}
-              time={session.time}
+              time={replaceWithPersianNumbers(session.time)}
             />
           ))}
-
-        {(!todaySchedule || todaySchedule.length === 0) && (
-          <div>امروز که کلاسی نداری</div>
-        )}
-
-        <div style={{ height: '10rem' }} />
-        <div style={{ height: '10rem' }} />
-      </div>
+          <div style={{ height: '10rem' }} />
+          <div style={{ height: '10rem' }} />
+        </div>
+      ) : (
+        <div className={styles.noKlass}>کلاس نداری : )</div>
+      )}
     </div>
   );
 }
