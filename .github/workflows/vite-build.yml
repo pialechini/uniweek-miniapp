@@ -1,51 +1,46 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - main
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
   deploy:
-    name: Deploy to GitHub Pages
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [22]
 
     steps:
-      # Step 1: Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js environment
-      - name: Set up Node.js
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
-      # Step 3: Set up pnpm
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v2.2.4 # Use the official pnpm setup action
-        with:
-          version: 8 # Specify your desired pnpm version (e.g., 8 or latest stable)
-
-      # Step 4: Install dependencies with pnpm
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install1
 
-      # Step 5: Build the project
       - name: Build Project
         run: pnpm build
 
-      # Step 6: Upload artifact for GitHub Pages
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
         with:
-          path: ./dist # Replace with your build output folder (e.g., "dist" or "build")
+          name: dist
+          path: ./dist
 
-      # Step 7: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
