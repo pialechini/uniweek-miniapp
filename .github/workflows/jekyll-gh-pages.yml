@@ -20,9 +20,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  runs-on: ubuntu-latest
-
   build:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [22]
