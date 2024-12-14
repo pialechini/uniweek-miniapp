@@ -20,38 +20,37 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build job
+name: pnpm Example Workflow
+on:
+  push:
+
+jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22]
     steps:
-      # Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
+    - name: Install dependencies
+      run: pnpm install
 
-      # Set up Node.js and pnpm
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 16 # or your preferred Node.js version
-          cache: "pnpm"
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9 # or the desired pnpm version
-
-      # Install dependencies and build the project
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build the project
+    - name: Build the project
         run: pnpm build
 
-      # Upload build output as an artifact for deployment
-      - name: Upload build output
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist # Path to the build directory
+    # Upload build output as an artifact for deployment
+    - name: Upload build output
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ./dist # Path to the build directory
 
   # Deployment job
   deploy:
