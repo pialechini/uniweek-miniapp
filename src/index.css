@@ -110,6 +110,11 @@ button {
   color: inherit;
 }
 
+input {
+  border: none;
+  background: transparent;
+  outline: none;
+}
 
 /* -------------------------------------------------------------------------- */
 /*                               General Styles                               */
@@ -123,4 +128,8 @@ body {
   font-size: 16px;
   color: white;
   height: 100dvh;
+}
+
+:root {
+  --color-bg: #110729
 }
