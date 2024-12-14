@@ -20,6 +20,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  runs-on: ubuntu-latest
+
   build:
     strategy:
       matrix:
