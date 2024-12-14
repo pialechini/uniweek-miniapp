@@ -6,7 +6,7 @@ import { useState } from 'react';
 type AuthContextValue = {
   loggedIn: boolean;
   login: () => void;
-  setToken: (token: string) => void;
+  setToken: (token: string) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -31,10 +31,10 @@ function AuthProvider({ children }: PropsWithChildren) {
 
   const value: AuthContextValue = {
     loggedIn,
-    setToken: (newToken: string) => {
+    setToken: async (newToken: string) => {
       token = newToken;
       setInLocalStorage('token', newToken);
-      login();
+      await login();
     },
     login,
   };
