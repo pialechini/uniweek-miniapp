@@ -1,0 +1,87 @@
+.positionContainer {
+  position: relative !important;
+}
+
+.toastContainer {
+  position: absolute !important;
+}
+
+.toastWrappper {
+  background-color: #211936 !important;
+  border: none !important;
+  border-radius: 0.8rem !important;
+  box-shadow:
+    0 16px 24px rgba(0, 0, 0, 0.14),
+    0 6px 30px rgba(0, 0, 0, 0.12),
+    0 8px 10px rgba(0, 0, 0, 0.14);
+}
+
+.toastContent {
+  display: flex;
+  gap: 1.6rem;
+  justify-content: start;
+  align-items: center;
+  margin-left: 0.2rem;
+  direction: rtl;
+}
+
+.icon {
+  padding: 0.4rem;
+  border-radius: 50%;
+  background-color: #303746;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  color: #fff;
+  font-family: Vazirmatn;
+  font-size: 1.7rem;
+  letter-spacing: -0.4px;
+}
+
+.content {
+  color: #c8c5c5;
+  font-family: Vazirmatn;
+  font-size: 1.3rem;
+  letter-spacing: -0.08px;
+}
+
+.blur {
+  width: 18rem;
+  height: 18rem;
+  position: absolute;
+  border-radius: 50%;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+.successBlur {
+  background: radial-gradient(
+    circle,
+    hsla(141, 100%, 46%, 0.05) 0%,
+    hsla(151, 100%, 46%, 0) 100%
+  );
+}
+
+.warnBlur {
+  background: radial-gradient(
+    circle,
+    hsla(48, 100%, 57%, 0.05) 0%,
+    hsla(48, 100%, 57%, 0) 100%
+  );
+}
+
+.errorBlur {
+  background: radial-gradient(
+    circle,
+    hsla(358, 85%, 60%, 0.05) 0%,
+    hsla(358, 85%, 60%, 0) 100%
+  );
+}

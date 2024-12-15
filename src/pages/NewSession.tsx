@@ -1,3 +1,4 @@
+import { toast } from '@/components/Toast';
 import Button from '@/components/forms/Button';
 import Dropdown from '@/components/forms/Dropdown';
 import RadioGroup from '@/components/forms/RadioGroup';
@@ -44,8 +45,11 @@ function NewSession() {
     });
 
     await Promise.all(requests)
-      .then(() => console.log('Session created successfully:'))
-      .catch(() => console.error('Failed to create session:'));
+      .then(() => toast.success('ایجاد جلسه جدید', 'درخواست موفقیت آمیز بود'))
+      .catch((error) => {
+        console.error(error);
+        toast.error('ایجاد جلسه جدید', 'خطا در ایجاد جلسه جدید');
+      });
   };
 
   return (
