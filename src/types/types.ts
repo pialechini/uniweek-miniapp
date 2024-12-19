@@ -34,16 +34,14 @@ export type WeekSchedule = {
 /* -------------------------------------------------------------------------- */
 /*                                     API                                    */
 /* -------------------------------------------------------------------------- */
-export type CreateKlassSessionRequest = {
-  klass: string;
-  day: number;
-  time: string;
-  location: string;
-  even_odd: string;
-};
-
 export type CreateKlassSessionResponse = {
-  message: string;
+  success: boolean;
+  status: number;
+  details: {
+    message: string;
+    successfullyAddedDays: number[];
+    conflictingDays: number[];
+  };
 };
 
 export type UpdateKlassSessionRequest = {

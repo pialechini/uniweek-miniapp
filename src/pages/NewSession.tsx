@@ -4,52 +4,71 @@ import Dropdown from '@/components/forms/Dropdown';
 import RadioGroup from '@/components/forms/RadioGroup';
 import TextInput from '@/components/forms/TextInput';
 import { replaceWithEnglishNumbers, weekdays } from '@/helpers';
-import { createKlassSession } from '@/services/klassSessionApi';
+import { createKlassSession } from '@/services/weekScheduleApi';
 import type { EvenOdd, Weekday } from '@/types';
+import { union } from 'lodash';
 import { useState } from 'react';
 
 import styles from './newSession.module.scss';
 
-const weekParities: Record<EvenOdd, string> = {
+const WEEK_PARITIES: Record<EvenOdd, string> = {
   even: 'هفته های زوج',
   odd: 'هفته های فرد',
   both: 'هر هفته',
 };
 
-const timeSlots = [
-  '۰۸:۰۰ تا ۰۹:۳۰',
-  '۱۰:۰۰ تا ۱۱:۳۰',
-  '۱۲:۰۰ تا ۱۳:۳۰',
-  '۱۴:۰۰ تا ۱۵:۳۰',
-  '۱۶:۰۰ تا ۱۷:۳۰',
+const TIME_SLOTS = [
+  '۰۸:۰۰ - ۰۹:۳۰',
+  '۱۰:۰۰ - ۱۱:۳۰',
+  '۱۲:۰۰ - ۱۳:۳۰',
+  '۱۴:۰۰ - ۱۵:۳۰',
+  '۱۶:۰۰ - ۱۷:۳۰',
 ];
 
 function NewSession() {
   const [selectedDays, setSelectedDays] = useState<Weekday[]>([weekdays[0]]);
-  const [selectedTime, setSelectedTime] = useState<string>(timeSlots[0]);
+  const [selectedTime, setSelectedTime] = useState<string>(TIME_SLOTS[0]);
   const [selectedParity, setSelectedParity] = useState<EvenOdd>('even');
   const [klassName, setKlassName] = useState<string>('');
   const [klassLocation, setKlassLocation] = useState<string>('');
 
-  const handleCreateSession = async () => {
-    const requests = selectedDays.map((day) => {
-      const payload = {
-        klass: klassName,
-        day: weekdays.indexOf(day),
-        time: replaceWithEnglishNumbers(selectedTime.replace('تا', '-').trim()),
-        location: klassLocation,
-        even_odd: selectedParity,
-      };
+  const handleCreateSession = () => {
+    const payload = {
+      klass: klassName.trim(),
+      days: selectedDays.map((selectedDay) => weekdays.indexOf(selectedDay)),
+      time: replaceWithEnglishNumbers(selectedTime.replace(/ /g, '').trim()),
+      location: klassLocation.trim(),
+      even_odd: selectedParity,
+    };
 
-      return createKlassSession(payload);
-    });
+    createKlassSession(payload)
+      .then((response) => {
+        const { successfullyAddedDays, conflictingDays } = response!.details;
 
-    await Promise.all(requests)
-      .then(() => toast.success('ایجاد جلسه جدید', 'درخواست موفقیت آمیز بود'))
-      .catch((error) => {
-        console.error(error);
-        toast.error('ایجاد جلسه جدید', 'خطا در ایجاد جلسه جدید');
-      });
+        console.log(response!.details);
+
+        if (successfullyAddedDays.length > 0) {
+          const addedDaysNames = successfullyAddedDays.map(
+            (day) => weekdays[day],
+          );
+          toast.success(
+            'جلسات با موفقیت اضافه شدند:',
+            addedDaysNames.join(', '),
+          );
+        }
+
+        // Display error message for conflicting days
+        if (conflictingDays.length > 0) {
+          const conflictingDaysNames = conflictingDays.map(
+            (day) => weekdays[day],
+          );
+          toast.error(
+            'جلسات به دلیل تداخل در روزهای زیر اضافه نشدند:',
+            conflictingDaysNames.join(', '),
+          );
+        }
+      })
+      .catch(() => {});
   };
 
   return (
@@ -62,7 +81,7 @@ function NewSession() {
           onChange={(e) => setKlassName(e.target.value)}
         />
 
-        {/* Day */}
+        {/* Day(s) */}
         <Dropdown header={selectedDays.join(' - ') || 'روز هفته را مشخص کنید'}>
           <RadioGroup
             multipleChoice
@@ -86,15 +105,15 @@ function NewSession() {
         />
 
         {/* Weeks */}
-        <Dropdown header={weekParities[selectedParity]}>
+        <Dropdown header={WEEK_PARITIES[selectedParity]}>
           <RadioGroup
-            items={Object.values(weekParities)}
-            intialSelectedItemIndex={Object.keys(weekParities).indexOf(
+            items={Object.values(WEEK_PARITIES)}
+            intialSelectedItemIndex={Object.keys(WEEK_PARITIES).indexOf(
               selectedParity,
             )}
             onChange={(selectedItemIndex) => {
               setSelectedParity(
-                Object.keys(weekParities)[selectedItemIndex] as EvenOdd,
+                Object.keys(WEEK_PARITIES)[selectedItemIndex] as EvenOdd,
               );
             }}
           />
@@ -103,10 +122,10 @@ function NewSession() {
         {/* Time */}
         <Dropdown header={selectedTime || 'زمان کلاس'}>
           <RadioGroup
-            items={timeSlots}
-            intialSelectedItemIndex={timeSlots.indexOf(selectedTime)}
+            items={TIME_SLOTS}
+            intialSelectedItemIndex={TIME_SLOTS.indexOf(selectedTime)}
             onChange={(selectedItemIndex) => {
-              setSelectedTime(timeSlots[selectedItemIndex]);
+              setSelectedTime(TIME_SLOTS[selectedItemIndex]);
             }}
           />
         </Dropdown>
