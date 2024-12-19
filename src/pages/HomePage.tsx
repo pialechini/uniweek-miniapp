@@ -21,11 +21,19 @@ type Props = {
   today: Date;
 };
 
-export function calculatePassedPercentage(
+function calculatePassedPercentage(
   now: Date,
+  selectedWeekday: Weekday,
   daySchedule: DaySchedule,
-): number {
+) {
   const totalSessions = daySchedule.length;
+
+  // Check if selectedWeekday is earlier in the week than today
+  const todayIndex = weekdayIndex(toWeekday(now));
+  const selectedIndex = weekdayIndex(selectedWeekday);
+  if (selectedIndex < todayIndex) {
+    return 100;
+  }
 
   if (totalSessions === 0) {
     return 100;
@@ -41,7 +49,9 @@ export function calculatePassedPercentage(
 
 function HomePage({ today }: Props) {
   const handleModal = useModal();
-  const [weekday, setWeekday] = useState<Weekday>(toWeekday(today));
+  const [selectedWeekday, setSelectedWeekday] = useState<Weekday>(
+    toWeekday(today),
+  );
 
   const fetchedWeekSchedule = useLoaderData() as WeekSchedule;
 
@@ -53,26 +63,30 @@ function HomePage({ today }: Props) {
         ? fetchedWeekSchedule.even_weeks_schedule
         : fetchedWeekSchedule.odd_weeks_schedule;
 
-    return thisWeekSchedule[weekdayIndex(weekday)];
-  }, [fetchedWeekSchedule, weekday]);
+    return thisWeekSchedule[weekdayIndex(selectedWeekday)];
+  }, [fetchedWeekSchedule, selectedWeekday]);
 
   return (
     <div className={styles.homePage}>
       <HeroSection
         date={today}
         evenOdd={weekParity === 'even' ? 'زوج' : 'فرد'}
-        percentage={calculatePassedPercentage(today, todaySchedule)}
+        percentage={calculatePassedPercentage(
+          today,
+          selectedWeekday,
+          todaySchedule,
+        )}
       />
 
       <DaySelect
         className={styles.day}
-        selectedDay={weekday}
+        selectedDay={selectedWeekday}
         onClick={() =>
           handleModal(
             <DaySelectModal
-              initialSelectedDay={weekday}
+              initialSelectedDay={selectedWeekday}
               onClose={(selectedDay) => {
-                setWeekday(selectedDay);
+                setSelectedWeekday(selectedDay);
                 handleModal();
               }}
             />,

@@ -34,16 +34,6 @@ export function getStartOfTerm() {
 }
 
 export function weekdayIndex(weekday: Weekday) {
-  const weekdays: Weekday[] = [
-    'شنبه',
-    'یکشنبه',
-    'دوشنبه',
-    'سه‌شنبه',
-    'چهارشنبه',
-    'پنجشنبه',
-    'جمعه',
-  ];
-
   return weekdays.indexOf(weekday);
 }
 
@@ -64,4 +54,5 @@ export const weekdays: Weekday[] = [
   'سه‌شنبه',
   'چهارشنبه',
   'پنجشنبه',
+  'جمعه',
 ] as const;
